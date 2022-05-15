@@ -27,7 +27,7 @@ uint16_t white = matrix.Color444(15, 15, 15);
 uint16_t yellow = matrix.Color444(15, 15, 0);
 
 int paddleWidth=1;
-int paddleHeight=5;
+int paddleHeight=3;
 
 int ballDiameter=1;
 int paddleX = 0;
