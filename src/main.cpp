@@ -28,13 +28,29 @@
 #define B   A1
 #define C   A2
 
-#define echoPinLeft 44
-#define echoPinRight 45
-#define trigPin 39
-
 RGBmatrixPanel matrix(A, B, C, CLK, LAT, OE, false);
 
+#define echoPinLeft 44
+#define echoPinRight 45
+#define triggerPin 39
+
+long durationLeft, durationRight;
+int distanceLeft, distanceRight;
+
 void setup() {
+
+    // ultrasonic module stuff
+
+    pinMode(triggerPin, OUTPUT);
+    pinMode(echoPinLeft, INPUT);
+    pinMode(echoPinRight, INPUT);
+    Serial.begin(9600);
+    Serial.println("Ultrasonic Sensor HC-SR04 Test");
+    Serial.println("with Arduino MEGA 2560");
+
+    /*
+
+    // matrix stuff
 
     matrix.begin();
 
@@ -95,8 +111,28 @@ void setup() {
     matrix.print('*');
 
     // whew!
+
+     */
 }
 
 void loop() {
     // Do nothing -- image doesn't change
+    digitalWrite(triggerPin, LOW);
+    delayMicroseconds(2);
+
+    digitalWrite(triggerPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(triggerPin, LOW);
+
+    durationLeft = static_cast<long>(pulseIn(echoPinLeft, HIGH));
+    durationRight = static_cast<long>(pulseIn(echoPinRight, HIGH));
+
+    distanceLeft = static_cast<int>((static_cast<double>(durationLeft) * 0.034) / 2);
+    distanceRight = static_cast<int>((static_cast<double>(durationRight) * 0.034) / 2);
+
+    Serial.print("Distance left :");
+    Serial.print(distanceLeft);
+    Serial.print(" cm | Distance right : ");
+    Serial.print(distanceRight);
+    Serial.println(" cm");
 }
