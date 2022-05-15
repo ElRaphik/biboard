@@ -1,26 +1,6 @@
-// testshapes demo for Adafruit RGBmatrixPanel library.
-// Demonstrates the drawing abilities of the RGBmatrixPanel library.
-// For 16x32 RGB LED matrix:
-// http://www.adafruit.com/products/420
+#include <Adafruit_GFX.h>   // Core graphics library
+#include <RGBmatrixPanel.h> // Hardware-specific library
 
-// Written by Limor Fried/Ladyada & Phil Burgess/PaintYourDragon
-// for Adafruit Industries.
-// BSD license, all text above must be included in any redistribution.
-
-#include <RGBmatrixPanel.h>
-#include <SPI.h>
-
-// Most of the signal pins are configurable, but the CLK pin has some
-// special constraints.  On 8-bit AVR boards it must be on PORTB...
-// Pin 8 works on the Arduino Uno & compatibles (e.g. Adafruit Metro),
-// Pin 11 works on the Arduino Mega.  On 32-bit SAMD boards it must be
-// on the same PORT as the RGB data pins (D2-D7)...
-// Pin 8 works on the Adafruit Metro M0 or Arduino Zero,
-// Pin A4 works on the Adafruit Metro M4 (if using the Adafruit RGB
-// Matrix Shield, cut trace between CLK pads and run a wire to A4).
-
-//#define CLK  8   // USE THIS ON ARDUINO UNO, ADAFRUIT METRO M0, etc.
-//#define CLK A4 // USE THIS ON METRO M4 (not M0)
 #define CLK 11 // USE THIS ON ARDUINO MEGA
 #define OE   9
 #define LAT 10
@@ -37,8 +17,30 @@ RGBmatrixPanel matrix(A, B, C, CLK, LAT, OE, false);
 long durationLeft, durationRight;
 int distanceLeft, distanceRight;
 
-void setup() {
+uint16_t black = matrix.Color444(0, 0, 0);
+uint16_t white = matrix.Color444(15, 15, 15);
+uint16_t yellow = matrix.Color444(15, 15, 0);
 
+int paddleWidth=5;
+int paddleHeight=1;
+
+int ballDiameter=1;
+int paddleX = 0;
+int paddleY = 0;
+int oldPaddleX, oldPaddleY;
+int ballDirectionX = 1;
+int ballDirectionY = 1;
+
+int ballSpeed = 200; //lower numbers are faster
+
+int ballX, ballY, oldBallX, oldBallY;
+
+boolean inPaddle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);
+void clear();
+void moveBall();
+void quicker();
+
+void setup() {
     // ultrasonic module stuff
 
     pinMode(triggerPin, OUTPUT);
@@ -48,75 +50,14 @@ void setup() {
     Serial.println("Ultrasonic Sensor HC-SR04 Test");
     Serial.println("with Arduino MEGA 2560");
 
-    /*
-
     // matrix stuff
-
     matrix.begin();
-
-    // draw a pixel in white
-    matrix.drawPixel(0, 0, matrix.Color333(7, 7, 7));
-    delay(500);
-
-    // fix the screen with green
-    matrix.fillRect(0, 0, 32, 16, matrix.Color333(0, 7, 0));
-    delay(500);
-
-    // draw a box in yellow
-    matrix.drawRect(0, 0, 32, 16, matrix.Color333(7, 7, 0));
-    delay(500);
-
-    // draw an 'X' in red
-    matrix.drawLine(0, 0, 31, 15, matrix.Color333(7, 0, 0));
-    matrix.drawLine(31, 0, 0, 15, matrix.Color333(7, 0, 0));
-    delay(500);
-
-    // draw a blue circle
-    matrix.drawCircle(7, 7, 7, matrix.Color333(0, 0, 7));
-    delay(500);
-
-    // fill a violet circle
-    matrix.fillCircle(23, 7, 7, matrix.Color333(7, 0, 7));
-    delay(500);
-
-    // fill the screen with black
-    matrix.fillScreen(matrix.Color333(0, 0, 0));
-
-    // draw some text!
-    matrix.setCursor(1, 0);  // start at top left, with one pixel of spacing
-    matrix.setTextSize(1);   // size 1 == 8 pixels high
-
-    // print each letter with a rainbow color
-    matrix.setTextColor(matrix.Color333(7,0,0));
-    matrix.print('1');
-    matrix.setTextColor(matrix.Color333(7,4,0));
-    matrix.print('6');
-    matrix.setTextColor(matrix.Color333(7,7,0));
-    matrix.print('x');
-    matrix.setTextColor(matrix.Color333(4,7,0));
-    matrix.print('3');
-    matrix.setTextColor(matrix.Color333(0,7,0));
-    matrix.print('2');
-
-    matrix.setCursor(1, 9);  // next line
-    matrix.setTextColor(matrix.Color333(0,7,7));
-    matrix.print('*');
-    matrix.setTextColor(matrix.Color333(0,4,7));
-    matrix.print('R');
-    matrix.setTextColor(matrix.Color333(0,0,7));
-    matrix.print('G');
-    matrix.setTextColor(matrix.Color333(4,0,7));
-    matrix.print('B');
-    matrix.setTextColor(matrix.Color333(7,0,4));
-    matrix.print('*');
-
-    // whew!
-
-     */
+    clear();
+    Serial.begin(57600);
 }
 
 void loop() {
-    // Do nothing -- image doesn't change
+    // distance
     digitalWrite(triggerPin, LOW);
     delayMicroseconds(2);
 
@@ -135,4 +76,77 @@ void loop() {
     Serial.print(" cm | Distance right : ");
     Serial.print(distanceRight);
     Serial.println(" cm");
+
+    // ???
+    int myWidth = matrix.width();
+    int myHeight = matrix.height();
+    int a0= analogRead(A4);
+    int a1= analogRead(A5);
+
+    paddleX = map(a0, 0, 1024, 0, myWidth)- paddleWidth/2 ;
+    paddleY = map(a1, 0, 1024, 0, myHeight)-paddleHeight/2 ;
+
+    if (oldPaddleX != paddleX || oldPaddleY != paddleY) {
+        matrix.fillRect(oldPaddleX, oldPaddleY, paddleWidth, paddleHeight,black);
+    }
+    matrix.fillRect(13, 15, paddleWidth, paddleHeight,white);
+
+    oldPaddleX = paddleX;
+    oldPaddleY = paddleY;
+
+    if (millis() % (ballSpeed/2) < 2) {
+        moveBall();
+    }
+}
+
+boolean inPaddle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight) {
+    boolean result = false;
+
+    if ((x >= rectX && x <= (rectX + rectWidth)) &&
+        (y >= rectY && y <= (rectY + rectHeight))) {
+        result = true;
+    }
+    return result;
+}
+
+void clear() {
+    matrix.fillScreen(black);
+
+}
+
+void moveBall() {
+    // if the ball goes offscreen, reverse the direction:
+    if (ballX > matrix.width()-1 || ballX < 0) {
+        ballDirectionX = -ballDirectionX;
+        quicker();
+    }
+
+    if (ballY > matrix.height()-1 || ballY < 0) {
+        ballDirectionY = -ballDirectionY;
+        quicker();
+    }
+
+    // check if the ball and the paddle occupy the same space on screen
+    if (inPaddle(ballX, ballY, paddleX, paddleY, paddleWidth, paddleHeight)) {
+        ballDirectionY = -ballDirectionY;
+        quicker();
+    }
+
+    // update the ball's position
+    ballX += ballDirectionX;
+    ballY += ballDirectionY;
+
+    // erase the ball's previous position
+    if (oldBallX != ballX || oldBallY != ballY) {
+//        matrix.fillRect(oldBallX, oldBallY, ballDiameter, ballDiameter,black);
+    }
+    // draw the ball's current position
+//    matrix.fillRect(ballX, ballY, ballDiameter, ballDiameter,white);
+
+    oldBallX = ballX;
+    oldBallY = ballY;
+}
+
+void quicker() {
+    if (ballSpeed>20) ballSpeed--;
 }
