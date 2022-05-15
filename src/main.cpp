@@ -94,7 +94,7 @@ void loop() {
         Serial.println("GO Right");
     }
     // clamp
-    paddleY = paddleY + paddleHeight > 15 ? 15 - paddleHeight : paddleY < 0 ? 0 : paddleY;
+    paddleY = paddleY + paddleHeight > 16 ? 16 - paddleHeight : paddleY < 0 ? 0 : paddleY;
 
     if (oldPaddleY != paddleY) {
         matrix.fillRect(paddleX, oldPaddleY, paddleWidth, paddleHeight,black);
