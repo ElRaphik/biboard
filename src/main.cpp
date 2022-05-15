@@ -28,6 +28,10 @@
 #define B   A1
 #define C   A2
 
+#define echoPinLeft 44
+#define echoPinRight 45
+#define trigPin 39
+
 RGBmatrixPanel matrix(A, B, C, CLK, LAT, OE, false);
 
 void setup() {
