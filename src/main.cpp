@@ -90,14 +90,15 @@ void loop() {
     Serial.println(" cm");
 
     // ???
-    int myWidth = matrix.width();
-//    int a0= analogRead(A4);
-//    int a1= analogRead(A5);
-    int a0 = 100 + 20 * -1;
-    int a1 = distanceRight;
-    Serial.println(distanceLeft > 30 ? "GO Right" : "GO Left");
-
-//    paddleY = map(a1, 0, 1024, 0, myHeight)-paddleHeight/2 ;
+    if (distanceLeft < 25) {
+        paddleX--;
+        Serial.println("GO Left");
+    } else if (distanceLeft > 50) {
+        paddleX++;
+        Serial.println("GO Right");
+    }
+    // clamp
+    paddleX = paddleX > 31 ? 31 : paddleX < 0 ? 0 : paddleX;
 
     if (oldPaddleX != paddleX) {
         matrix.fillRect(oldPaddleX, 15, paddleWidth, paddleHeight,black);
