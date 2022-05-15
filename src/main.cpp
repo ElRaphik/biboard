@@ -1,5 +1,6 @@
 #include <Adafruit_GFX.h>   // Core graphics library
 #include <RGBmatrixPanel.h> // Hardware-specific library
+#include "PongBar.h"
 
 #define CLK 11 // USE THIS ON ARDUINO MEGA
 #define OE   9
@@ -45,6 +46,10 @@ void clear();
 void moveBall();
 void quicker();
 
+
+PongBar leftBar(0, 0, matrix);
+
+
 void setup() {
     // ultrasonic module stuff
 
@@ -60,8 +65,9 @@ void setup() {
     clear();
 
     // game
-    paddleX = 0;
-    paddleY = matrix.height() / 2 - paddleHeight / 2;
+//    paddleX = 0;
+//    paddleY = matrix.height() / 2 - paddleHeight / 2;
+    leftBar.spawn();
 }
 
 void loop() {
@@ -87,21 +93,22 @@ void loop() {
 
     // ???
     if (distanceLeft < 25) {
-        paddleY--;
-        Serial.println("GO Left");
+        leftBar.move(0, -1);
+//        paddleY--;
+        Serial.println("GO Up");
     } else if (distanceLeft > 50) {
-        paddleY++;
-        Serial.println("GO Right");
+        leftBar.move(0, 1);
+//        paddleY++;
+        Serial.println("GO Down");
     }
-    // clamp
-    paddleY = paddleY + paddleHeight > 16 ? 16 - paddleHeight : paddleY < 0 ? 0 : paddleY;
 
-    if (oldPaddleY != paddleY) {
-        matrix.fillRect(paddleX, oldPaddleY, paddleWidth, paddleHeight,black);
-    }
-    matrix.fillRect(paddleX, paddleY, paddleWidth, paddleHeight,white);
+//    if (oldPaddleY != paddleY) {
+//        matrix.fillRect(paddleX, oldPaddleY, paddleWidth, paddleHeight,black);
+//    }
+//    matrix.fillRect(paddleX, paddleY, paddleWidth, paddleHeight,white);
+//    oldPaddleY = paddleY;
 
-    oldPaddleY = paddleY;
+    leftBar.print();
 
     if (millis() % (ballSpeed/2) < 2) {
         moveBall();
