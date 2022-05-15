@@ -26,13 +26,13 @@ uint16_t black = matrix.Color444(0, 0, 0);
 uint16_t white = matrix.Color444(15, 15, 15);
 uint16_t yellow = matrix.Color444(15, 15, 0);
 
-int paddleWidth=5;
-int paddleHeight=1;
+int paddleWidth=1;
+int paddleHeight=5;
 
 int ballDiameter=1;
 int paddleX = 0;
 int paddleY = 0;
-int oldPaddleX, oldPaddleY;
+int oldPaddleY;
 int ballDirectionX = 1;
 int ballDirectionY = 1;
 
@@ -60,8 +60,8 @@ void setup() {
     clear();
 
     // game
-    int myWidth = matrix.width();
-    paddleX = myWidth / 2 - paddleWidth / 2;
+    paddleX = 0;
+    paddleY = matrix.height() / 2 - paddleHeight / 2;
 }
 
 void loop() {
@@ -87,25 +87,21 @@ void loop() {
 
     // ???
     if (distanceLeft < 25) {
-        paddleX--;
+        paddleY--;
         Serial.println("GO Left");
     } else if (distanceLeft > 50) {
-        paddleX++;
+        paddleY++;
         Serial.println("GO Right");
     }
-
     // clamp
-    paddleX = paddleX + paddleWidth > 31 ? 31 - paddleWidth : paddleX < 0 ? 0 : paddleX;
-    Serial.println(paddleX);
+    paddleY = paddleY + paddleHeight > 15 ? 15 - paddleHeight : paddleY < 0 ? 0 : paddleY;
 
-
-    if (oldPaddleX != paddleX) {
-        matrix.fillRect(oldPaddleX, 15, paddleWidth, paddleHeight,black);
+    if (oldPaddleY != paddleY) {
+        matrix.fillRect(paddleX, oldPaddleY, paddleWidth, paddleHeight,black);
     }
-    matrix.fillRect(paddleX, 15, paddleWidth, paddleHeight,white);
+    matrix.fillRect(paddleX, paddleY, paddleWidth, paddleHeight,white);
 
-    oldPaddleX = paddleX;
-//    oldPaddleY = paddleY;
+    oldPaddleY = paddleY;
 
 //    if (millis() % (ballSpeed/2) < 2) {
 //        moveBall();
