@@ -73,15 +73,11 @@ void loop() {
     delayMicroseconds(10);
     digitalWrite(triggerPin, LOW);
 
-    if (left) {
-        durationLeft = static_cast<long>(pulseIn(echoPinLeft, HIGH));
-        distanceLeft = static_cast<int>((static_cast<double>(durationLeft) * 0.034) / 2);
-        left = false;
-    } else {
-        durationRight = static_cast<long>(pulseIn(echoPinRight, HIGH));
-        distanceRight = static_cast<int>((static_cast<double>(durationRight) * 0.034) / 2);
-        left = true;
-    }
+    durationLeft = static_cast<long>(pulseIn(echoPinLeft, HIGH));
+    distanceLeft = static_cast<int>((static_cast<double>(durationLeft) * 0.034) / 2);
+    delayMicroseconds(10);
+    durationRight = static_cast<long>(pulseIn(echoPinRight, HIGH));
+    distanceRight = static_cast<int>((static_cast<double>(durationRight) * 0.034) / 2);
 
     Serial.print("Distance left :");
     Serial.print(distanceLeft);
@@ -98,7 +94,7 @@ void loop() {
         Serial.println("GO Right");
     }
     // clamp
-    paddleX = paddleX > 31 ? 31 : paddleX < 0 ? 0 : paddleX;
+    paddleX = paddleX + paddleWidth > 31 ? 31 - paddleWidth : paddleX - paddleWidth < 0 ? 0 : paddleX;
 
     if (oldPaddleX != paddleX) {
         matrix.fillRect(oldPaddleX, 15, paddleWidth, paddleHeight,black);
@@ -108,9 +104,9 @@ void loop() {
     oldPaddleX = paddleX;
     oldPaddleY = paddleY;
 
-    if (millis() % (ballSpeed/2) < 2) {
-        moveBall();
-    }
+//    if (millis() % (ballSpeed/2) < 2) {
+//        moveBall();
+//    }
 }
 
 boolean inPaddle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight) {
