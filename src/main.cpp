@@ -10,12 +10,17 @@
 
 RGBmatrixPanel matrix(A, B, C, CLK, LAT, OE, false);
 
+// echo
+
 #define echoPinLeft 44
 #define echoPinRight 45
 #define triggerPin 39
 
 long durationLeft, durationRight;
 int distanceLeft, distanceRight;
+boolean left;
+
+// matrix
 
 uint16_t black = matrix.Color444(0, 0, 0);
 uint16_t white = matrix.Color444(15, 15, 15);
@@ -53,7 +58,10 @@ void setup() {
     // matrix stuff
     matrix.begin();
     clear();
-    Serial.begin(57600);
+
+    // game
+    int myWidth = matrix.width();
+    paddleX = myWidth / 2 - paddleWidth / 2;
 }
 
 void loop() {
@@ -65,11 +73,15 @@ void loop() {
     delayMicroseconds(10);
     digitalWrite(triggerPin, LOW);
 
-    durationLeft = static_cast<long>(pulseIn(echoPinLeft, HIGH));
-    durationRight = static_cast<long>(pulseIn(echoPinRight, HIGH));
-
-    distanceLeft = static_cast<int>((static_cast<double>(durationLeft) * 0.034) / 2);
-    distanceRight = static_cast<int>((static_cast<double>(durationRight) * 0.034) / 2);
+    if (left) {
+        durationLeft = static_cast<long>(pulseIn(echoPinLeft, HIGH));
+        distanceLeft = static_cast<int>((static_cast<double>(durationLeft) * 0.034) / 2);
+        left = false;
+    } else {
+        durationRight = static_cast<long>(pulseIn(echoPinRight, HIGH));
+        distanceRight = static_cast<int>((static_cast<double>(durationRight) * 0.034) / 2);
+        left = true;
+    }
 
     Serial.print("Distance left :");
     Serial.print(distanceLeft);
@@ -79,17 +91,18 @@ void loop() {
 
     // ???
     int myWidth = matrix.width();
-    int myHeight = matrix.height();
-    int a0= analogRead(A4);
-    int a1= analogRead(A5);
+//    int a0= analogRead(A4);
+//    int a1= analogRead(A5);
+    int a0 = 100 + 20 * -1;
+    int a1 = distanceRight;
+    Serial.println(distanceLeft > 30 ? "GO Right" : "GO Left");
 
-    paddleX = map(a0, 0, 1024, 0, myWidth)- paddleWidth/2 ;
-    paddleY = map(a1, 0, 1024, 0, myHeight)-paddleHeight/2 ;
+//    paddleY = map(a1, 0, 1024, 0, myHeight)-paddleHeight/2 ;
 
-    if (oldPaddleX != paddleX || oldPaddleY != paddleY) {
-        matrix.fillRect(oldPaddleX, oldPaddleY, paddleWidth, paddleHeight,black);
+    if (oldPaddleX != paddleX) {
+        matrix.fillRect(oldPaddleX, 15, paddleWidth, paddleHeight,black);
     }
-    matrix.fillRect(13, 15, paddleWidth, paddleHeight,white);
+    matrix.fillRect(paddleX, 15, paddleWidth, paddleHeight,white);
 
     oldPaddleX = paddleX;
     oldPaddleY = paddleY;
