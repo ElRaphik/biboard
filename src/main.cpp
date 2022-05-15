@@ -36,7 +36,7 @@ int oldPaddleY;
 int ballDirectionX = 1;
 int ballDirectionY = 1;
 
-int ballSpeed = 200; //lower numbers are faster
+int ballSpeed = 10; //lower numbers are faster
 
 int ballX, ballY, oldBallX, oldBallY;
 
@@ -103,9 +103,9 @@ void loop() {
 
     oldPaddleY = paddleY;
 
-//    if (millis() % (ballSpeed/2) < 2) {
-//        moveBall();
-//    }
+    if (millis() % (ballSpeed/2) < 2) {
+        moveBall();
+    }
 }
 
 boolean inPaddle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight) {
@@ -147,10 +147,10 @@ void moveBall() {
 
     // erase the ball's previous position
     if (oldBallX != ballX || oldBallY != ballY) {
-//        matrix.fillRect(oldBallX, oldBallY, ballDiameter, ballDiameter,black);
+        matrix.fillRect(oldBallX, oldBallY, ballDiameter, ballDiameter,black);
     }
-    // draw the ball's current position
-//    matrix.fillRect(ballX, ballY, ballDiameter, ballDiameter,white);
+//     draw the ball's current position
+    matrix.fillRect(ballX, ballY, ballDiameter, ballDiameter,white);
 
     oldBallX = ballX;
     oldBallY = ballY;
