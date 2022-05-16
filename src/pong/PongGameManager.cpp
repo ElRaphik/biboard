@@ -11,7 +11,7 @@ void PongGameManager::update() {
     manager.update();
     leftBar.update(manager);
     rightBar.update(manager);
-    ball.update(manager, leftBar);
+    ball.update(manager, leftBar, rightBar);
 }
 
 void PongGameManager::render() {

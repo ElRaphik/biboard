@@ -17,9 +17,8 @@ void Ball::update(const InputManager& manager) {
 }
 
 void Ball::update(const InputManager &manager, const PongBar &bar, const PongBar &bar2) {
-    if(isColliding(bar) || isColliding(bar2)) {
+    if(isColliding(bar) || isColliding(bar2))
         xForce = - xForce;
-    }
     update(manager);
 }
 
