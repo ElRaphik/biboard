@@ -12,7 +12,7 @@ void InputManager::awake() {
     Serial.println("with Arduino MEGA 2560");
 }
 
-void InputManager::update(PongGameManager& gameManager) {
+void InputManager::update() {
     // distance
     digitalWrite(triggerPin, LOW);
     delayMicroseconds(2);
@@ -21,7 +21,7 @@ void InputManager::update(PongGameManager& gameManager) {
     delayMicroseconds(10);
     digitalWrite(triggerPin, LOW);
 
-    if(gameManager.doLeft) {
+    if(true) {
         durationLeft = (long) pulseIn(echoPinLeft, HIGH);
         distanceLeft = (int) ((double) durationLeft * 0.034 / 2);
     } else {

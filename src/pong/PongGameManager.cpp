@@ -1,5 +1,4 @@
 #include "../../include/pong/PongGameManager.h"
-#include "framework/InputManager.h"
 
 void PongGameManager::awake() {
     musicManager.awake();
@@ -12,8 +11,8 @@ void PongGameManager::awake() {
 void PongGameManager::update() {
     musicManager.update();
     inputManager.update();
-    (doLeft ? leftBar : rightBar).update(manager);
-    ball.update(manager, leftBar);
+    (doLeft ? leftBar : rightBar).update(inputManager);
+    ball.update(inputManager, leftBar);
     doLeft = !doLeft;
 }
 

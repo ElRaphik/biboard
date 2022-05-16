@@ -1,3 +1,4 @@
+#pragma once
 #ifndef PING_PONGGAMEOBJECT_H
 #define PING_PONGGAMEOBJECT_H
 

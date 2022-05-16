@@ -1,3 +1,4 @@
+#pragma once
 #ifndef PING_PONGGAMEMANAGER_H
 #define PING_PONGGAMEMANAGER_H
 

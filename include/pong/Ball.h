@@ -1,3 +1,4 @@
+#pragma once
 #ifndef PING_BALL_H
 #define PING_BALL_H
 

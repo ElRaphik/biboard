@@ -1,3 +1,4 @@
+#pragma once
 #ifndef PING_GAMEOBJECT_H
 #define PING_GAMEOBJECT_H
 

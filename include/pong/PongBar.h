@@ -1,3 +1,4 @@
+#pragma once
 #ifndef PING_PONGBAR_H
 #define PING_PONGBAR_H
 

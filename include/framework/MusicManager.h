@@ -1,3 +1,4 @@
+#pragma once
 #ifndef PING_MUSICMANAGER_H
 #define PING_MUSICMANAGER_H
 

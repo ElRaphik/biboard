@@ -1,8 +1,8 @@
+#pragma once
 #ifndef PING_INPUTMANAGER_H
 #define PING_INPUTMANAGER_H
 
 #include "GameObject.h"
-#include "../pong/PongGameManager.h"
 
 /// A class handling the input of the user
 /// \class InputManager
@@ -23,7 +23,8 @@ public:
 
 public:
     void awake() override;
-    void update(PongGameManager&);
+    void update() override;
+//    void update(PongGameManager&);
     void render() override;
 
 public:
@@ -43,7 +44,8 @@ public:
         return distanceRight > 50;
     }
 private:
-    void move(int, int) override {}
+    void move(int, int) override {};
+//    void update() override {};
 };
 
 #endif
