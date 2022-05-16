@@ -1,9 +1,6 @@
 #include "../../include/framework/InputManager.h"
 #include <Adafruit_GFX.h>   // Core graphics library
 #include <RGBmatrixPanel.h> // Hardware-specific library
-#include <mbed.h>
-#include <hcsr04.h>
-#include <FXOS8700Q.h>
 
 InputManager::InputManager(RGBmatrixPanel &panel) : GameObject(0, 0, 0, 0, 0, 0,panel) {}
 
