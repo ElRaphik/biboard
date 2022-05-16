@@ -1,6 +1,9 @@
 #include "../../include/framework/InputManager.h"
 #include <Adafruit_GFX.h>   // Core graphics library
 #include <RGBmatrixPanel.h> // Hardware-specific library
+#include <mbed.h>
+#include <hcsr04.h>
+#include <FXOS8700Q.h>
 
 InputManager::InputManager(RGBmatrixPanel &panel) : GameObject(0, 0, 0, 0, 0, 0,panel) {}
 
@@ -8,8 +11,8 @@ void InputManager::awake() {
     pinMode(triggerPin, OUTPUT);
     pinMode(echoPinLeft, INPUT);
     pinMode(echoPinRight, INPUT);
-    Serial.println("Ultrasonic Sensor HC-SR04 Test");
-    Serial.println("with Arduino MEGA 2560");
+//    Serial.println("Ultrasonic Sensor HC-SR04 Test");
+//    Serial.println("with Arduino MEGA 2560");
 }
 
 void InputManager::update() {

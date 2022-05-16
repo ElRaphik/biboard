@@ -14,8 +14,9 @@ void PongGameManager::update() {
     (inputManager.shouldDoLeft() ? leftBar : rightBar).update(inputManager);
 //    leftBar.update(inputManager);
 //    rightBar.update(inputManager);
-    ball.update(inputManager, leftBar, rightBar);
+    doesOneHavePoint = ball.update(inputManager, leftBar, rightBar);
     inputManager.invertShouldDoLeft();
+
 }
 
 void PongGameManager::render() {
