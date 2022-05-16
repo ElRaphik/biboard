@@ -42,7 +42,7 @@ MusicManager::MusicManager(RGBmatrixPanel& m) : GameObject(m), notes(sizeof(melo
 }
 
 void MusicManager::awake() {
-    play();
+//    play();
 }
 
 void MusicManager::update() {
