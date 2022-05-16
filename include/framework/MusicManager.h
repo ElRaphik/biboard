@@ -32,7 +32,7 @@ class MusicManager : public GameObject {
 
     int divider = 0, noteDuration = 0;
 
-    bool isPlaying = false;
+    int thisNote;
 
     int* melody;
 public:
@@ -47,6 +47,8 @@ public:
     void move(int x, int y) override {};
 
     void play();
+
+    void playNote(int i);
 };
 
 

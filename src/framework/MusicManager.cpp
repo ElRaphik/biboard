@@ -57,42 +57,38 @@ MusicManager::~MusicManager() {
 }
 
 void MusicManager::awake() {
-//    play();
 }
 
 void MusicManager::update() {
-//    if (!isPlaying)
-//        play();
+    if (thisNote < notes * 2) {
+        playNote(thisNote);
+    } else {
+        playNote(thisNote = 0);
+    }
+    thisNote += 2;
 }
 
 void MusicManager::render() {
 }
 
-void MusicManager::play() {
-    isPlaying = true;
-    // iterate over the notes of the melody.
-    // Remember, the array is twice the number of notes (notes + durations)
-    for (int thisNote = 0; thisNote < notes * 2; thisNote = thisNote + 2) {
-
-        // calculates the duration of each note
-        divider = melody[thisNote + 1];
-        if (divider > 0) {
-            // regular note, just proceed
-            noteDuration = (wholenote) / divider;
-        } else if (divider < 0) {
-            // dotted notes are represented with negative durations!!
-            noteDuration = (wholenote) / abs(divider);
-            noteDuration *= 1.5; // increases the duration in half for dotted notes
-        }
-
-        // we only play the note for 90% of the duration, leaving 10% as a pause
-        tone(buzzer, melody[thisNote], noteDuration*0.9);
-
-        // Wait for the specief duration before playing the next note.
-        delay(noteDuration);
-
-        // stop the waveform generation before the next note.
-        noTone(buzzer);
+void MusicManager::playNote(int i) {
+    // calculates the duration of each note
+    divider = melody[i + 1];
+    if (divider > 0) {
+        // regular note, just proceed
+        noteDuration = (wholenote) / divider;
+    } else if (divider < 0) {
+        // dotted notes are represented with negative durations!!
+        noteDuration = (wholenote) / abs(divider);
+        noteDuration *= 1.5; // increases the duration in half for dotted notes
     }
-    isPlaying = false;
+
+    // we only play the note for 90% of the duration, leaving 10% as a pause
+    tone(buzzer, melody[i], noteDuration * 0.9);
+
+    // Wait for the specief duration before playing the next note.
+    delay(noteDuration);
+
+    // stop the waveform generation before the next note.
+    noTone(buzzer);
 }
