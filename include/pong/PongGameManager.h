@@ -20,10 +20,6 @@ public:
     void update() override;
     void render() override;
 
-public:
-    /// \return the input manager used in update
-    const InputManager& getInputManager() const override;
-
 private:
     void move(int x, int y) override {}
 };
