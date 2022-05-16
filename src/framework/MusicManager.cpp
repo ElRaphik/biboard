@@ -4,7 +4,13 @@
 // a 4 means a quarter note, 8 an eighteenth , 16 sixteenth, so on
 // !!negative numbers are used to represent dotted notes,
 // so -4 means a dotted quarter note, that is, a quarter plus an eighteenth!!
-int melody[] = {
+/*
+  Tetris theme - (Korobeiniki)
+  Connect a piezo buzzer or speaker to pin 11 or select a new pin.
+  More songs available at https://github.com/robsoncouto/arduino-songs
+                                              Robson Couto, 2019
+*/
+int tetris[] = {
         //Based on the arrangement at https://www.flutetunes.com/tunes.php?id=192
         NOTE_E5, 4,  NOTE_B4,8,  NOTE_C5,8,  NOTE_D5,4,  NOTE_C5,8,  NOTE_B4,8,
         NOTE_A4, 4,  NOTE_A4,8,  NOTE_C5,8,  NOTE_E5,4,  NOTE_D5,8,  NOTE_C5,8,
@@ -38,46 +44,51 @@ int melody[] = {
 
 };
 
-MusicManager::MusicManager(RGBmatrixPanel& m) : GameObject(m), notes(sizeof(melody)/sizeof(melody[0])/2) {
+MusicManager::MusicManager(RGBmatrixPanel& m) : GameObject(m), notes() {
+    melody = new int[197];
+    for (int i = 0; i < 197; ++i) {
+        melody[i] = tetris[i];
+    }
+    notes = 197/sizeof(melody[0])/2;
+}
+
+MusicManager::~MusicManager() {
+    delete melody;
 }
 
 void MusicManager::awake() {
-//    play();
 }
 
 void MusicManager::update() {
-//    if (!isPlaying)
-//        play();
+    if (thisNote < notes * 2) {
+        playNote(thisNote);
+    } else {
+        playNote(thisNote = 0);
+    }
+    thisNote += 2;
 }
 
 void MusicManager::render() {
 }
 
-void MusicManager::play() {
-    isPlaying = true;
-    // iterate over the notes of the melody.
-    // Remember, the array is twice the number of notes (notes + durations)
-    for (int thisNote = 0; thisNote < notes * 2; thisNote = thisNote + 2) {
-
-        // calculates the duration of each note
-        divider = melody[thisNote + 1];
-        if (divider > 0) {
-            // regular note, just proceed
-            noteDuration = (wholenote) / divider;
-        } else if (divider < 0) {
-            // dotted notes are represented with negative durations!!
-            noteDuration = (wholenote) / abs(divider);
-            noteDuration *= 1.5; // increases the duration in half for dotted notes
-        }
-
-        // we only play the note for 90% of the duration, leaving 10% as a pause
-        tone(buzzer, melody[thisNote], noteDuration*0.9);
-
-        // Wait for the specief duration before playing the next note.
-        delay(noteDuration);
-
-        // stop the waveform generation before the next note.
-        noTone(buzzer);
+void MusicManager::playNote(int i) {
+    // calculates the duration of each note
+    divider = melody[i + 1];
+    if (divider > 0) {
+        // regular note, just proceed
+        noteDuration = (wholenote) / divider;
+    } else if (divider < 0) {
+        // dotted notes are represented with negative durations!!
+        noteDuration = (wholenote) / abs(divider);
+        noteDuration *= 1.5; // increases the duration in half for dotted notes
     }
-    isPlaying = false;
+
+    // we only play the note for 90% of the duration, leaving 10% as a pause
+    tone(buzzer, melody[i], noteDuration * 0.9);
+
+    // Wait for the specief duration before playing the next note.
+    delay(noteDuration);
+
+    // stop the waveform generation before the next note.
+    noTone(buzzer);
 }
