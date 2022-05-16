@@ -18,13 +18,9 @@ private:
 
     unsigned int distanceLeft = 0, distanceRight = 0;
     int posLeft = 0, posRight = 0;
-    bool doLeft = true;
 public:
     unsigned int getDistanceLeft() const;
     unsigned int getDistanceRight() const;
-    bool shouldDoLeft() const;
-
-    void invertShouldDoLeft();
 
 public:
     explicit InputManager(RGBmatrixPanel &panel);
@@ -40,10 +36,7 @@ public:
 public:
     void awake() override;
     void update() override;
-//    void update(PongGameManager&);
-    void render() override;
-
-    void update(bool=true);
+    void render() override {}
 
 private:
     void move(int, int) override {}
