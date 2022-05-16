@@ -4,13 +4,6 @@
 
 #include "GameObject.h"
 
-/*
-  Tetris theme - (Korobeiniki)
-  Connect a piezo buzzer or speaker to pin 11 or select a new pin.
-  More songs available at https://github.com/robsoncouto/arduino-songs
-
-                                              Robson Couto, 2019
-*/
 #define NOTE_GS4 415
 #define NOTE_A4  440
 #define NOTE_B4  494
@@ -22,12 +15,6 @@
 #define NOTE_GS5 831
 #define NOTE_A5  880
 #define REST 0
-
-// notes of the moledy followed by the duration.
-// a 4 means a quarter note, 8 an eighteenth , 16 sixteenth, so on
-// !!negative numbers are used to represent dotted notes,
-// so -4 means a dotted quarter note, that is, a quarter plus an eighteenth!!
-extern int melody[];
 
 class MusicManager : public GameObject {
     // change this to make the song slower or faster
@@ -46,8 +33,11 @@ class MusicManager : public GameObject {
     int divider = 0, noteDuration = 0;
 
     bool isPlaying = false;
+
+    int* melody;
 public:
     explicit MusicManager(RGBmatrixPanel& m);
+    ~MusicManager();
 
 public:
     void awake() override;

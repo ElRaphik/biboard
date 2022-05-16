@@ -4,7 +4,13 @@
 // a 4 means a quarter note, 8 an eighteenth , 16 sixteenth, so on
 // !!negative numbers are used to represent dotted notes,
 // so -4 means a dotted quarter note, that is, a quarter plus an eighteenth!!
-int melody[] = {
+/*
+  Tetris theme - (Korobeiniki)
+  Connect a piezo buzzer or speaker to pin 11 or select a new pin.
+  More songs available at https://github.com/robsoncouto/arduino-songs
+                                              Robson Couto, 2019
+*/
+int tetris[] = {
         //Based on the arrangement at https://www.flutetunes.com/tunes.php?id=192
         NOTE_E5, 4,  NOTE_B4,8,  NOTE_C5,8,  NOTE_D5,4,  NOTE_C5,8,  NOTE_B4,8,
         NOTE_A4, 4,  NOTE_A4,8,  NOTE_C5,8,  NOTE_E5,4,  NOTE_D5,8,  NOTE_C5,8,
@@ -38,11 +44,20 @@ int melody[] = {
 
 };
 
-MusicManager::MusicManager(RGBmatrixPanel& m) : GameObject(m), notes(sizeof(melody)/sizeof(melody[0])/2) {
+MusicManager::MusicManager(RGBmatrixPanel& m) : GameObject(m), notes() {
+    melody = new int[197];
+    for (int i = 0; i < 197; ++i) {
+        melody[i] = tetris[i];
+    }
+    notes = 197/sizeof(melody[0])/2;
+}
+
+MusicManager::~MusicManager() {
+    delete melody;
 }
 
 void MusicManager::awake() {
-    play();
+//    play();
 }
 
 void MusicManager::update() {
