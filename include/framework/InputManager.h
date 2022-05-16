@@ -2,6 +2,7 @@
 #define PING_INPUTMANAGER_H
 
 #include "GameObject.h"
+#include "../pong/PongGameManager.h"
 
 /// A class handling the input of the user
 /// \class InputManager
@@ -14,11 +15,15 @@ private:
     long durationLeft = 0, durationRight = 0;
     int distanceLeft = 0, distanceRight = 0;
 public:
+    int getDistanceLeft() const;
+    int getDistanceRight() const;
+
+public:
     explicit InputManager(RGBmatrixPanel &panel);
 
 public:
     void awake() override;
-    void update() override;
+    void update(PongGameManager&);
     void render() override;
 
 public:
