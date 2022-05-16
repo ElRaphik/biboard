@@ -7,20 +7,20 @@ Ball::Ball(int x, int y, RGBmatrixPanel &matrix) : PongGameObject(x, y, x, y, 1,
 
 void Ball::awake() {
     matrix.fillRect(x, y, width, height, matrix.Color333(7, 7, 7));
-//    firstPush(1, 1);
+    firstPush(1, 1);
 }
 
 void Ball::update(const InputManager& manager) {
-
+    move(0, 0);
 }
 
-void Ball::render() {
+//void Ball::render() {
+//
+//}
 
-}
-
-void Ball::move(int x, int y) {
-
-}
+//void Ball::move(int x, int y) {
+//
+//}
 
 //void Ball::update(const InputManager &manager) {
 //    if (millis() % (ballSpeed / 2) < 2) {
@@ -53,26 +53,26 @@ void Ball::move(int x, int y) {
 
 // utils
 
-//void Ball::move(int, int) {
-//    if (x + xForce < 0 || x + xForce > matrix.width() - 1) xForce = -xForce;
-//    if (y + yForce < 0 || y + yForce > matrix.height() - 1) yForce = -yForce;
-//    x += xForce;
-//    y += yForce;
-//}
+void Ball::move(int, int) {
+    if (x + xForce < 0 || x + xForce > matrix.width() - 1) xForce = -xForce;
+    if (y + yForce < 0 || y + yForce > matrix.height() - 1) yForce = -yForce;
+    x += xForce;
+    y += yForce;
+}
 
-//void Ball::print() {
-//    if (y == oldY && x == oldX) return;
-//    matrix.fillRect(oldX, oldY, width, height, matrix.Color333(0, 0, 0));
-//    matrix.fillRect(x, y, width, height, matrix.Color333(7, 7, 7));
-//    oldX = x;
-//    oldY = y;
-//}
-//
-//void Ball::firstPush(int xFr, int yFr) {
-//    xForce = xFr;
-//    yForce = yFr;
-//}
-//
+void Ball::render() {
+    if (y == oldY && x == oldX) return;
+    matrix.fillRect(oldX, oldY, width, height, matrix.Color333(0, 0, 0));
+    matrix.fillRect(x, y, width, height, matrix.Color333(7, 7, 7));
+    oldX = x;
+    oldY = y;
+}
+
+void Ball::firstPush(int xFr, int yFr) {
+    xForce = xFr;
+    yForce = yFr;
+}
+
 //void Ball::quicker() {
 //    if (ballSpeed > 20) ballSpeed--;
 //}

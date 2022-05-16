@@ -24,6 +24,7 @@ public:
     void render() override;
 public:
     void move(int x, int y) override;
+    void firstPush(int, int);
 };
 
 
