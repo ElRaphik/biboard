@@ -29,4 +29,5 @@ void setup() {
 void loop() {
     pong.update();
     pong.render();
+    delay(75);
 }

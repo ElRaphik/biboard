@@ -91,7 +91,7 @@ void Ball::reset(bool left) {
         xForce=-1;
         yForce=1;
     }
-    y = matrix.height()/2;
+    y = matrix.height()*2/3;
     oldX=x;
     oldY=y;
     matrix.fillRect(x, y, width, height, matrix.Color333(7, 7, 7));
