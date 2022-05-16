@@ -21,7 +21,7 @@ void InputManager::update() {
     delayMicroseconds(10);
     digitalWrite(triggerPin, LOW);
 
-    if(true) {
+    if(shouldDoLeft()) {
         durationLeft = (long) pulseIn(echoPinLeft, HIGH);
         distanceLeft = (int) ((double) durationLeft * 0.034 / 2);
     } else {
@@ -55,5 +55,7 @@ bool InputManager::shouldDoLeft() const {
 }
 
 void InputManager::invertShouldDoLeft() {
-    doLeft = !doLeft;
+    // FU*K YOU CLION, HOPE YOU HAPPY MF
+    if (doLeft) doLeft = false;
+    else doLeft = true;
 }
