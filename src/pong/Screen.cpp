@@ -9,7 +9,7 @@ void Screen::writeScores(int leftScore, int rightScore) {
     matrix.fillScreen(matrix.Color333(0,0,0));
     matrix.setTextSize(1);
     matrix.setTextColor(matrix.Color333(7, 7, 7));
-    matrix.setCursor(1,4);
+    matrix.setCursor(matrix.width()/4,4);
     matrix.print(leftScore);
     matrix.print(" ");
     matrix.print(rightScore);
