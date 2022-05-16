@@ -47,4 +47,5 @@ void PongBar::reset(bool left) {
     y=matrix.height()/2;
     oldX=x;
     oldY=y;
+    matrix.fillRect(x, y, width, height, matrix.Color333(7, 7, 7));
 }
