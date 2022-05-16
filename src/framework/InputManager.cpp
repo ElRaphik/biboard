@@ -1,4 +1,4 @@
-#include "../include/InputManager.h"
+#include "framework/InputManager.h"
 
 InputManager::InputManager(RGBmatrixPanel &panel) : GameObject(0, 0, 0, 0, 0, 0,panel) {}
 
@@ -8,12 +8,6 @@ void InputManager::awake() {
     pinMode(echoPinRight, INPUT);
     Serial.println("Ultrasonic Sensor HC-SR04 Test");
     Serial.println("with Arduino MEGA 2560");
-}
-
-void InputManager::move(int, int) {
-}
-
-void InputManager::print() {
 }
 
 void InputManager::update() {
@@ -36,4 +30,7 @@ void InputManager::update() {
 //    Serial.print(" cm | Distance right : ");
 //    Serial.print(distanceRight);
     Serial.println(" cm");
+}
+
+void InputManager::render() {
 }
