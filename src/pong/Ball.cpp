@@ -1,6 +1,6 @@
 #include "pong/Ball.h"
 
-Ball::Ball(int x, int y, RGBmatrixPanel &matrix) : GameObject(x, y, x, y, 1, 1, matrix) {
+Ball::Ball(int x, int y, RGBmatrixPanel &matrix) : PongGameObject(x, y, x, y, 1, 1, matrix) {
     xForce = 0;
     yForce = 0;
 }

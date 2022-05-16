@@ -1,8 +1,7 @@
 #ifndef PING_INPUTMANAGER_H
 #define PING_INPUTMANAGER_H
 
-
-#include "framework/GameObject.h"
+#include "GameObject.h"
 
 /// A class handling the input of the user
 /// \class InputManager
@@ -19,7 +18,7 @@ public:
 
 public:
     void awake() override;
-    void update(const InputManager& manager) override;
+    void update() override;
     void render() override;
 
 public:

@@ -10,7 +10,7 @@ void InputManager::awake() {
     Serial.println("with Arduino MEGA 2560");
 }
 
-void InputManager::update(const InputManager&) {
+void InputManager::update() {
     // distance
     digitalWrite(triggerPin, LOW);
     delayMicroseconds(2);

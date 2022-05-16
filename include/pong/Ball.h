@@ -3,11 +3,11 @@
 
 #include "Adafruit_GFX.h"   // Core graphics library
 #include "RGBmatrixPanel.h" // Hardware-specific library
-#include "framework/GameObject.h"
+#include "pong/PongGameObject.h"
 #include "framework/InputManager.h"
 #include "PongBar.h"
 
-class Ball : public GameObject {
+class Ball : public PongGameObject {
 
 protected:
     int xForce, yForce;

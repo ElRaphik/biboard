@@ -17,7 +17,7 @@ public: // constructor
     }
 public:
     void awake() override;
-    void update();
+    void update() override;
     void render() override;
 
 public:
@@ -26,7 +26,6 @@ public:
 
 private:
     void move(int x, int y) override {}
-    void update(const InputManager&) override {}
 };
 
 

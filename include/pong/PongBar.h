@@ -3,10 +3,10 @@
 
 #include "Adafruit_GFX.h"   // Core graphics library
 #include "RGBmatrixPanel.h" // Hardware-specific library
-#include "framework/GameObject.h"
+#include "pong/PongGameObject.h"
 #include "framework/InputManager.h"
 
-class PongBar : public GameObject {
+class PongBar : public PongGameObject {
 
 public:
     PongBar(int, int, RGBmatrixPanel&);
