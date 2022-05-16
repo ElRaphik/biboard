@@ -11,7 +11,7 @@ void Screen::writeScores(int leftScore, int rightScore) {
     matrix.setTextColor(matrix.Color333(7, 7, 7));
     matrix.setCursor(matrix.width()/4,4);
     matrix.print(leftScore);
-    matrix.print(" ");
+    matrix.print("-");
     matrix.print(rightScore);
     matrix.setCursor(0,0);
     delay(2000);
