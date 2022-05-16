@@ -17,7 +17,10 @@ void PongGameManager::update() {
     doesOneHavePoint = ball.update(inputManager, leftBar, rightBar);
     if(doesOneHavePoint != 0) {
         doesOneHavePoint==1?leftScore++:rightScore++;
+        if(leftScore==10 || rightScore==10)
+            screen.writeWinner(leftScore==10);
         screen.writeScores(leftScore, rightScore);
+        reset();
         doesOneHavePoint=0;
     }
     inputManager.invertShouldDoLeft();
@@ -33,5 +36,7 @@ void PongGameManager::render() {
 }
 
 void PongGameManager::reset() {
-
+    ball.reset(doesOneHavePoint==1);
+    leftBar.reset(true);
+    rightBar.reset(false);
 }

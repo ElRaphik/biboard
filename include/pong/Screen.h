@@ -15,6 +15,8 @@ class Screen {
 public:
     explicit Screen(RGBmatrixPanel& matrix) : matrix(matrix){};
     void writeScores(int, int);
+    void writeWinner(bool);
+    void(* resetFunc) (void) = 0;
 };
 
 
