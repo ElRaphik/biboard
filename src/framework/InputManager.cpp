@@ -35,9 +35,9 @@ void InputManager::update(bool left) {
 
 //    left ? distanceLeft : distanceRight = distance < 10 ? 10 : distance > 50 ? 50 : distance;
     if(left)
-        distanceLeft = distance < 10 ? 10 : distance > 38 ? 38 : distance;
+        distanceLeft = distance < 10 ? 10 : distance > 37 ? 37 : distance;
     else
-        distanceRight = distance < 10 ? 10 : distance > 38 ? 38 : distance;
+        distanceRight = distance < 10 ? 10 : distance > 37 ? 37 : distance;
 
     posLeft = setPosition(distanceLeft);
     posRight = setPosition(distanceRight);
