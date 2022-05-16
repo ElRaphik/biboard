@@ -3,7 +3,8 @@
 #include <RGBmatrixPanel.h> // Hardware-specific library
 
 InputManager::InputManager(RGBmatrixPanel &panel) : GameObject(0, 0, 0, 0, 0, 0,panel),
-    ultrasonic1(triggerPin,echoPinLeft), ultrasonic2(triggerPin,echoPinRight) {}
+    ultrasonic1(triggerPin,echoPinLeft, 5000UL),
+    ultrasonic2(triggerPin,echoPinRight, 5000UL) {}
 
 void InputManager::awake() {
     Serial.println("Ultrasonic Sensor HC-SR04 Test");
