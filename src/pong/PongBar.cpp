@@ -34,10 +34,10 @@ void PongBar::move(int, int yForce) {
     if (y + yForce < 0) {
         y = 0;
         return;
-    } // set x to 0 to stay in bounds
+    } // set y to 0 to stay in bounds
     if (y + height + yForce > 16) {
         y = 16 - height;
         return;
-    } // set x to 16-height
+    } // set y to 16-height
     y += yForce;
 }
