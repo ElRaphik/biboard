@@ -7,7 +7,12 @@
 class GameObject {
 
 protected:
-    int x, y, oldX, oldY, width, height;
+    int x;
+    int y;
+    int oldX;
+    int oldY;
+    int width;
+    int height;
     RGBmatrixPanel& matrix;
 
 public: // members

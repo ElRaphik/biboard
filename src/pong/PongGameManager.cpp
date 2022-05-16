@@ -21,7 +21,3 @@ void PongGameManager::render() {
     rightBar.render();
     ball.render();
 }
-
-const InputManager& PongGameManager::getInputManager() const {
-    return manager;
-}
