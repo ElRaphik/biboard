@@ -21,7 +21,7 @@ class MusicManager : public GameObject {
     int tempo=144;
 
     // change this to whichever pin you want to use
-    int buzzer = 11;
+    int buzzer = 3;
 
     // sizeof gives the number of bytes, each int value is composed of two bytes (16 bits)
     // there are two values per note (pitch and duration), so for each note there are four bytes

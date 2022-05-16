@@ -27,6 +27,8 @@ public:
 
 private:
     void move(int x, int y) override {}
+    int doesOneHavePoint;
+    int leftScore=0;
 };
 
 

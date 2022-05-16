@@ -21,7 +21,7 @@ public:
     Ball(int, int, RGBmatrixPanel&);
 public:
     void awake() override;
-    void update(const InputManager& manager, const PongBar& bar, const PongBar &bar2);
+    int update(const InputManager& manager, const PongBar& bar, const PongBar &bar2);
     void render() override;
 public:
     void move(int x, int y) override;

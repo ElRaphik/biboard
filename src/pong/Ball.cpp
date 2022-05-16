@@ -16,10 +16,14 @@ void Ball::update(const InputManager& manager) {
     move(0, 0);
 }
 
-void Ball::update(const InputManager &manager, const PongBar &bar, const PongBar &bar2) {
+int Ball::update(const InputManager &manager, const PongBar &bar, const PongBar &bar2) {
+    int rtr = 0;
     if(isColliding(bar) || isColliding(bar2))
         xForce = - xForce;
+    else if(x+xForce == 0) rtr=1;
+    else if(x+xForce==31) rtr=2;
     update(manager);
+    return rtr;
 }
 
 void Ball::render() {

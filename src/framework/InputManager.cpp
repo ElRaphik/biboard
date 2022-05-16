@@ -8,8 +8,8 @@ void InputManager::awake() {
     pinMode(triggerPin, OUTPUT);
     pinMode(echoPinLeft, INPUT);
     pinMode(echoPinRight, INPUT);
-    Serial.println("Ultrasonic Sensor HC-SR04 Test");
-    Serial.println("with Arduino MEGA 2560");
+//    Serial.println("Ultrasonic Sensor HC-SR04 Test");
+//    Serial.println("with Arduino MEGA 2560");
 }
 
 void InputManager::update() {
