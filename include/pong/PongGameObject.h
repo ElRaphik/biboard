@@ -1,8 +1,8 @@
 #ifndef PING_PONGGAMEOBJECT_H
 #define PING_PONGGAMEOBJECT_H
 
-#include "framework/GameObject.h"
-#include "framework/InputManager.h"
+#include "../framework/GameObject.h"
+#include "../framework/InputManager.h"
 
 class PongGameObject : public GameObject {
 public:

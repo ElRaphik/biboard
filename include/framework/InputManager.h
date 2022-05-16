@@ -16,7 +16,6 @@ private:
     int distanceLeft = 0, distanceRight = 0;
 public:
     int getDistanceLeft() const;
-
     int getDistanceRight() const;
 
 public:
