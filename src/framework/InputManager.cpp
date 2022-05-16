@@ -16,15 +16,15 @@ void InputManager::update() {
     distanceLeft = ultrasonic1.read(CM);
     distanceRight = ultrasonic2.read(CM);
 
-    Serial.print("Distance left :");
-    Serial.print(distanceLeft);
-    Serial.print(" cm | Distance right : ");
-    Serial.print(distanceRight);
-    Serial.println(" cm");
+//    Serial.print("Distance left :");
+//    Serial.print(distanceLeft);
+//    Serial.print(" cm | Distance right : ");
+//    Serial.print(distanceRight);
+//    Serial.println(" cm");
 
-    distanceLeft = distanceLeft < 10 ? 10 : distanceLeft > 37 ? 37 : distanceLeft;
-    distanceRight = distanceRight < 10 ? 10 : distanceRight > 37 ? 37 : distanceRight;
+    distanceLeft = distanceLeft < 5 ? 5 : distanceLeft > 18 ? 18 : distanceLeft;
+    distanceRight = distanceRight < 5 ? 5 : distanceRight > 18 ? 18 : distanceRight;
 
-    posLeft = setPosition(distanceLeft);
-    posRight = setPosition(distanceRight);
+    posLeft = setPosition((int) distanceLeft);
+    posRight = setPosition((int) distanceRight);
 }

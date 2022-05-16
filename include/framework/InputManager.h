@@ -37,8 +37,8 @@ public:
 private:
     void move(int, int) override {}
     static int setPosition(int dist) {
-        int res = dist - 10;
-        res = res/2;
+        int res = dist - 5;
+//        res = res/2;
         return res;
     }
 };
