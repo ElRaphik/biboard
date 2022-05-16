@@ -1,7 +1,3 @@
-//
-// Created by asdch on 16/05/2022.
-//
-
 #ifndef PING_GAMEOBJECT_H
 #define PING_GAMEOBJECT_H
 #include "Adafruit_GFX.h"   // Core graphics library
@@ -15,17 +11,16 @@ protected:
     RGBmatrixPanel& matrix;
 
 public: // members
-    int getX() const;
-    int getY() const;
-    int getOldX() const;
-    int getOldY() const;
-    int getWidth() const;
-    int getHeight() const;
-    const RGBmatrixPanel &getMatrix() const;
+    int getX() const { return x; }
+    int getY() const { return y; }
+    int getOldX() const { return oldX; }
+    int getOldY() const { return oldY; }
+    int getWidth() const { return width; }
+    int getHeight() const { return height; }
+    const RGBmatrixPanel &getMatrix() const { return matrix; }
 
 public: // constructors
     GameObject(GameObject&);
-    explicit GameObject(RGBmatrixPanel&);
     GameObject(int, int, int, int, int, int, RGBmatrixPanel&);
 
 public: // methods

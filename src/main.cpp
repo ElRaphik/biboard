@@ -28,10 +28,10 @@ uint16_t black = matrix.Color444(0, 0, 0);
 uint16_t white = matrix.Color444(15, 15, 15);
 uint16_t yellow = matrix.Color444(15, 15, 0);
 
-int paddleWidth=1;
-int paddleHeight=3;
+int paddleWidth = 1;
+int paddleHeight = 3;
 
-int ballDiameter=1;
+int ballDiameter = 1;
 int paddleX = 0;
 int paddleY = 0;
 int oldPaddleY;
@@ -43,13 +43,16 @@ int ballSpeed = 10; //lower numbers are faster
 int ballX, ballY, oldBallX, oldBallY;
 
 boolean inPaddle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);
+
 void clear();
+
 void moveBall();
+
 void quicker();
 
 
 PongBar leftBar(0, 0, matrix);
-Ball ball(matrix.width()/2, matrix.height()/2, matrix);
+Ball ball(matrix.width() / 2, matrix.height() / 2, matrix);
 
 
 void setup() {
@@ -114,7 +117,7 @@ void loop() {
 
     leftBar.print();
 
-    if (millis() % (ballSpeed/2) < 2) {
+    if (millis() % (ballSpeed / 2) < 2) {
 //        moveBall();
         ball.move(0, 0);
         ball.print();
@@ -138,12 +141,12 @@ void clear() {
 
 void moveBall() {
     // if the ball goes offscreen, reverse the direction:
-    if (ballX > matrix.width()-1 || ballX < 0) {
+    if (ballX > matrix.width() - 1 || ballX < 0) {
         ballDirectionX = -ballDirectionX;
         quicker();
     }
 
-    if (ballY > matrix.height()-1 || ballY < 0) {
+    if (ballY > matrix.height() - 1 || ballY < 0) {
         ballDirectionY = -ballDirectionY;
         quicker();
     }
@@ -160,15 +163,15 @@ void moveBall() {
 
     // erase the ball's previous position
     if (oldBallX != ballX || oldBallY != ballY) {
-        matrix.fillRect(oldBallX, oldBallY, ballDiameter, ballDiameter,black);
+        matrix.fillRect(oldBallX, oldBallY, ballDiameter, ballDiameter, black);
     }
 //     draw the ball's current position
-    matrix.fillRect(ballX, ballY, ballDiameter, ballDiameter,white);
+    matrix.fillRect(ballX, ballY, ballDiameter, ballDiameter, white);
 
     oldBallX = ballX;
     oldBallY = ballY;
 }
 
 void quicker() {
-    if (ballSpeed>20) ballSpeed--;
+    if (ballSpeed > 20) ballSpeed--;
 }

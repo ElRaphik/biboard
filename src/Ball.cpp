@@ -4,16 +4,16 @@
 
 #include "../include/Ball.h"
 
-Ball::Ball(int x, int y, RGBmatrixPanel& matrix) : GameObject(x, y, x, y, 1, 1, matrix) {
+Ball::Ball(int x, int y, RGBmatrixPanel &matrix) : GameObject(x, y, x, y, 1, 1, matrix) {
     xForce = 0;
     yForce = 0;
 }
 
 void Ball::move(int, int) {
-    if(x + xForce < 0 || x + xForce > matrix.width()-1) xForce = -xForce;
-    if(y + yForce < 0 || y + yForce > matrix.height()-1) yForce = -yForce;
-    x+=xForce;
-    y+=yForce;
+    if (x + xForce < 0 || x + xForce > matrix.width() - 1) xForce = -xForce;
+    if (y + yForce < 0 || y + yForce > matrix.height() - 1) yForce = -yForce;
+    x += xForce;
+    y += yForce;
 }
 
 void Ball::print() {

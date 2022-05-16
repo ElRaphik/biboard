@@ -1,9 +1,6 @@
-//
-// Created by asdch on 16/05/2022.
-//
-
 #ifndef PING_BALL_H
 #define PING_BALL_H
+
 #include "GameObject.h"
 #include "Adafruit_GFX.h"   // Core graphics library
 #include "RGBmatrixPanel.h" // Hardware-specific library
