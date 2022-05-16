@@ -8,10 +8,11 @@ void PongGameManager::awake() {
 }
 
 void PongGameManager::update() {
-    manager.update();
-    leftBar.update(manager);
-    rightBar.update(manager);
+    manager.update(doLeft);
+    leftBar.update(manager, true);
+    rightBar.update(manager, false);
     ball.update(manager, leftBar, rightBar);
+    doLeft = !doLeft;
 }
 
 void PongGameManager::render() {

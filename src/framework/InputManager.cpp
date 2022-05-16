@@ -13,6 +13,15 @@ void InputManager::awake() {
 }
 
 void InputManager::update() {
+
+}
+
+void InputManager::render() {
+}
+
+void InputManager::update(bool left) {
+    long duration;
+    int distance;
     // distance
     digitalWrite(triggerPin, LOW);
     delayMicroseconds(2);
@@ -21,18 +30,27 @@ void InputManager::update() {
     delayMicroseconds(10);
     digitalWrite(triggerPin, LOW);
 
-    durationLeft = (long) pulseIn(echoPinLeft, HIGH);
-    distanceLeft = (int) ((float) durationLeft * 0.034 / 2);
+    duration = (long) pulseIn(left ? echoPinLeft : echoPinRight, HIGH);
+    distance = (int) ((float) duration * 0.034 / 2);
+
+//    left ? distanceLeft : distanceRight = distance < 10 ? 10 : distance > 50 ? 50 : distance;
+    if(left)
+        distanceLeft = distance < 10 ? 10 : distance > 38 ? 38 : distance;
+    else
+        distanceRight = distance < 10 ? 10 : distance > 38 ? 38 : distance;
+
+    posLeft = setPosition(distanceLeft);
+    posRight = setPosition(distanceRight);
+
+//    durationLeft = (long) pulseIn(echoPinLeft, HIGH);
+//    distanceLeft = (int) ((float) durationLeft * 0.034 / 2);
 //    delayMicroseconds(1000);
 //    durationRight = static_cast<long>(pulseIn(echoPinRight, HIGH));
 //    distanceRight = static_cast<int>((static_cast<double>(durationRight) * 0.034) / 2);
-
-    Serial.print("Distance left :");
-    Serial.print(distanceLeft);
+//    Serial.print(distance);
+//    Serial.print("Distance left :");
+//    Serial.print(distanceLeft);
 //    Serial.print(" cm | Distance right : ");
 //    Serial.print(distanceRight);
-    Serial.println(" cm");
-}
-
-void InputManager::render() {
+//    Serial.println(" cm");
 }

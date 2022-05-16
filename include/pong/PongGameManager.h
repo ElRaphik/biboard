@@ -11,10 +11,11 @@ public: // attributes
     PongBar rightBar;
     Ball ball;
     InputManager manager;
+    bool doLeft;
 
 public: // constructor
     explicit PongGameManager(RGBmatrixPanel& matrix) : GameManager(matrix), leftBar(0, 0, matrix), rightBar(31, 0, matrix), ball(matrix.width() / 2, matrix.height() / 2, matrix),
-                                              manager(matrix) {
+                                              manager(matrix), doLeft(true) {
     }
 public:
     void awake() override;

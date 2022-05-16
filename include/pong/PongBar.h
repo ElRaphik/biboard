@@ -13,6 +13,7 @@ public:
 public:
     void awake() override;
     void update(const InputManager& manager) override;
+    void update(const InputManager& manager, bool);
     void render() override;
 private:
     void move(int, int) override;
