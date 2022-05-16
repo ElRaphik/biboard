@@ -1,4 +1,6 @@
-#include "framework/InputManager.h"
+#include "../../include/framework/InputManager.h"
+#include <Adafruit_GFX.h>   // Core graphics library
+#include <RGBmatrixPanel.h> // Hardware-specific library
 
 InputManager::InputManager(RGBmatrixPanel &panel) : GameObject(0, 0, 0, 0, 0, 0,panel) {}
 

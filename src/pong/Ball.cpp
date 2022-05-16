@@ -1,41 +1,27 @@
 #include "pong/Ball.h"
 
 Ball::Ball(int x, int y, RGBmatrixPanel &matrix) : PongGameObject(x, y, x, y, 1, 1, matrix) {
-    xForce = 1;
-    yForce = 1;
+    xForce = 0;
+    yForce = 0;
 }
 
 void Ball::awake() {
     matrix.fillRect(x, y, width, height, matrix.Color333(7, 7, 7));
-//    firstPush(1, 1);
+    firstPush(1, 1);
 }
 
-void Ball::update(const InputManager& manager, const PongBar &bar) {
-    if (millis() % (ballSpeed / 2) < 2) {
 
-        // if the ball goes offscreen, reverse the direction:
-        if (x > matrix.width() - 1 || x < 0) {
-            ballDirectionX = -ballDirectionX;
-            quicker();
-        }
 
-        if (y > matrix.height() - 1 || y < 0) {
-            ballDirectionY = -ballDirectionY;
-            quicker();
-        }
+void Ball::update(const InputManager& manager) {
+    move(0, 0);
+}
 
-        // check if the ball and the paddle occupy the same space on screen
-        if (isColliding(bar)) {
-            ballDirectionY = -ballDirectionY;
-            quicker();
-        }
-
-        // update the ball's position
-        x += ballDirectionX;
-        y += ballDirectionY;
-
-        move(x, y);
+void Ball::update(const InputManager &manager, const PongBar &bar) {
+    if(isColliding(bar)) {
+        xForce = - xForce;
+        yForce = -yForce;
     }
+    update(manager);
 }
 
 void Ball::render() {
@@ -53,6 +39,46 @@ void Ball::move(int, int) {
     y += yForce;
 }
 
-void Ball::quicker() {
-    if (ballSpeed > 20) ballSpeed--;
+//void Ball::update(const InputManager &manager) {
+//    if (millis() % (ballSpeed / 2) < 2) {
+//
+//        // if the ball goes offscreen, reverse the direction:
+//        if (x > matrix.width() - 1 || x < 0) {
+//            ballDirectionX = -ballDirectionX;
+//            quicker();
+//        }
+//
+//        if (y > matrix.height() - 1 || y < 0) {
+//            ballDirectionY = -ballDirectionY;
+//            quicker();
+//        }
+//
+//        // check if the ball and the paddle occupy the same space on screen
+//        if (isColliding(*bar)) {
+//            ballDirectionY = -ballDirectionY;
+//            quicker();
+//        }
+//
+//        // update the ball's position
+//        x += ballDirectionX;
+//        y += ballDirectionY;
+//
+//        move(x, y);
+//        print();
+//    }
+//}
+
+// utils
+
+void Ball::firstPush(int xFr, int yFr) {
+    xForce = xFr;
+    yForce = yFr;
 }
+
+void Ball::quicker() {
+
+}
+
+//void Ball::quicker() {
+//    if (ballSpeed > 20) ballSpeed--;
+//}
