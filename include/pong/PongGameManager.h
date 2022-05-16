@@ -10,6 +10,7 @@ public: // attributes
     PongBar leftBar;
     Ball ball;
     InputManager manager;
+    bool doLeft = true;
 
 public: // constructor
     explicit PongGameManager(RGBmatrixPanel& matrix) : GameManager(matrix), leftBar(0, 0, matrix), ball(matrix.width() / 2, matrix.height() / 2, matrix),

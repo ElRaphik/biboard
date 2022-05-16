@@ -12,7 +12,7 @@ void InputManager::awake() {
     Serial.println("with Arduino MEGA 2560");
 }
 
-void InputManager::update() {
+void InputManager::update(PongGameManager& gameManager) {
     // distance
     digitalWrite(triggerPin, LOW);
     delayMicroseconds(2);
@@ -21,18 +21,31 @@ void InputManager::update() {
     delayMicroseconds(10);
     digitalWrite(triggerPin, LOW);
 
-    durationLeft = (long) pulseIn(echoPinLeft, HIGH);
-    distanceLeft = (int) ((float) durationLeft * 0.034 / 2);
+    if(gameManager.doLeft) {
+        durationLeft = (long) pulseIn(echoPinLeft, HIGH);
+        distanceLeft = (int) ((double) durationLeft * 0.034 / 2);
+    } else {
+        durationRight = (long) pulseIn(echoPinRight, HIGH);
+        distanceRight = (int) ((double) durationRight * 0.034 / 2);
+    }
 //    delayMicroseconds(1000);
-//    durationRight = static_cast<long>(pulseIn(echoPinRight, HIGH));
-//    distanceRight = static_cast<int>((static_cast<double>(durationRight) * 0.034) / 2);
 
-    Serial.print("Distance left :");
-    Serial.print(distanceLeft);
+//    Serial.print("Distance left :");
+//    Serial.print(distanceLeft);
 //    Serial.print(" cm | Distance right : ");
 //    Serial.print(distanceRight);
-    Serial.println(" cm");
+//    Serial.println(" cm");
+    distanceLeft = distanceLeft < 10 ? 10 : distanceLeft > 50 ? 50 : distanceLeft;
+    distanceRight = distanceRight < 10 ? 10 : distanceRight > 50 ? 50 : distanceRight;
 }
 
 void InputManager::render() {
+}
+
+int InputManager::getDistanceLeft() const {
+    return distanceLeft;
+}
+
+int InputManager::getDistanceRight() const {
+    return distanceRight;
 }
