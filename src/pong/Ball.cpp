@@ -21,7 +21,7 @@ int Ball::update(const InputManager &manager, const PongBar &bar, const PongBar 
     if(isColliding(bar) || isColliding(bar2))
         xForce = - xForce;
     else if(x+xForce == 0) rtr=2;
-    else if(x+xForce==31) rtr=1;
+    else if(x+xForce==32) rtr=1;
     update(manager);
     return rtr;
 }
