@@ -4,8 +4,8 @@
 
 #ifndef PING_GAMEOBJECT_H
 #define PING_GAMEOBJECT_H
-#include <Adafruit_GFX.h>   // Core graphics library
-#include <RGBmatrixPanel.h> // Hardware-specific library
+#include "Adafruit_GFX.h"   // Core graphics library
+#include "RGBmatrixPanel.h" // Hardware-specific library
 
 
 class GameObject {

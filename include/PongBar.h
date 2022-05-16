@@ -5,8 +5,8 @@
 #ifndef PING_PONGBAR_H
 #define PING_PONGBAR_H
 #include "GameObject.h"
-#include <Adafruit_GFX.h>   // Core graphics library
-#include <RGBmatrixPanel.h> // Hardware-specific library
+#include "Adafruit_GFX.h"   // Core graphics library
+#include "RGBmatrixPanel.h" // Hardware-specific library
 
 class PongBar : public GameObject{
 
