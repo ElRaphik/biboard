@@ -248,7 +248,7 @@ struct Harry : MusicData {
 };
 
 MusicManager::MusicManager(RGBmatrixPanel& m) : GameObject(m), notes() {
-    Harry t;
+    Doom t;
     melody = t.getMusic();
     notes = t.getSize()/sizeof(melody[0])/2;
     tempo = t.getTempo();
