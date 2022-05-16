@@ -3,6 +3,7 @@
 #define PING_INPUTMANAGER_H
 
 #include "GameObject.h"
+#include <Ultrasonic.h>
 
 /// A class handling the input of the user
 /// \class InputManager
@@ -12,13 +13,15 @@ private:
     const int echoPinRight = 45;
     const int triggerPin = 39;
 
-    long durationLeft = 0, durationRight = 0;
-    int distanceLeft = 0, distanceRight = 0;
+    Ultrasonic ultrasonic1;
+    Ultrasonic ultrasonic2;
+
+    unsigned int distanceLeft = 0, distanceRight = 0;
 
     bool doLeft = true;
 public:
-    int getDistanceLeft() const;
-    int getDistanceRight() const;
+    unsigned int getDistanceLeft() const;
+    unsigned int getDistanceRight() const;
     bool shouldDoLeft() const;
 
     void invertShouldDoLeft();
