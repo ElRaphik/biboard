@@ -17,7 +17,7 @@ void Ball::update(const InputManager& manager) {
 }
 
 void Ball::update(const InputManager &manager, const PongBar &bar) {
-
+    update(manager);
 }
 
 void Ball::render() {
@@ -34,10 +34,6 @@ void Ball::move(int, int) {
     x += xForce;
     y += yForce;
 }
-
-//void Ball::quicker() {
-//    if (ballSpeed > 20) ballSpeed--;
-//}
 
 //void Ball::update(const InputManager &manager) {
 //    if (millis() % (ballSpeed / 2) < 2) {
