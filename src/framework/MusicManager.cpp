@@ -248,7 +248,7 @@ struct Harry : MusicData {
 };
 
 MusicManager::MusicManager(RGBmatrixPanel& m) : GameObject(m), notes() {
-    Doom t;
+    Tetris t;
     melody = t.getMusic();
     notes = t.getSize()/sizeof(melody[0])/2;
     tempo = t.getTempo();
@@ -264,9 +264,9 @@ void MusicManager::awake() {
 
 void MusicManager::update() {
     if (thisNote < notes * 2) {
-        playNote(thisNote);
+//        playNote(thisNote);
     } else {
-        playNote(thisNote = 0);
+//        playNote(thisNote = 0);
     }
     thisNote += 2;
 }
