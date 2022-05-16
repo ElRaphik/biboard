@@ -39,7 +39,7 @@ void Ball::move(int, int) {
     y += yForce;
 }
 
-//void Ball::update(const InputManager &manager) {
+//void Ball::update(const InputManager &inputManager) {
 //    if (millis() % (ballSpeed / 2) < 2) {
 //
 //        // if the ball goes offscreen, reverse the direction:

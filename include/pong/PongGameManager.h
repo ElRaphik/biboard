@@ -4,16 +4,18 @@
 #include "PongBar.h"
 #include "Ball.h"
 #include "framework/GameManager.h"
+#include "framework/MusicManager.h"
 
 class PongGameManager : public GameManager {
 public: // attributes
     PongBar leftBar;
     Ball ball;
-    InputManager manager;
+    InputManager inputManager;
+    MusicManager musicManager;
 
 public: // constructor
     explicit PongGameManager(RGBmatrixPanel& matrix) : GameManager(matrix), leftBar(0, 0, matrix), ball(matrix.width() / 2, matrix.height() / 2, matrix),
-                                              manager(matrix) {
+                                                       inputManager(matrix), musicManager(matrix) {
     }
 public:
     void awake() override;

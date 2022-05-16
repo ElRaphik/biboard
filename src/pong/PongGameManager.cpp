@@ -1,19 +1,22 @@
 #include "../../include/pong/PongGameManager.h"
 
 void PongGameManager::awake() {
-    manager.awake();
+    musicManager.awake();
+    inputManager.awake();
     leftBar.awake();
     ball.awake();
 }
 
 void PongGameManager::update() {
-    manager.update();
-    leftBar.update(manager);
-    ball.update(manager, leftBar);
+    musicManager.update();
+    inputManager.update();
+    leftBar.update(inputManager);
+    ball.update(inputManager, leftBar);
 }
 
 void PongGameManager::render() {
-    manager.render();
+    musicManager.render();
+    inputManager.render();
     leftBar.render();
     ball.render();
 }
