@@ -19,10 +19,6 @@ private:
     unsigned int distanceLeft = 0, distanceRight = 0;
     int posLeft = 0, posRight = 0;
 public:
-    unsigned int getDistanceLeft() const;
-    unsigned int getDistanceRight() const;
-
-public:
     explicit InputManager(RGBmatrixPanel &panel);
 
     int getPosLeft() const {

@@ -264,9 +264,9 @@ void MusicManager::awake() {
 
 void MusicManager::update() {
     if (thisNote < notes * 2) {
-//        playNote(thisNote);
+        playNote(thisNote);
     } else {
-//        playNote(thisNote = 0);
+        playNote(thisNote = 0);
     }
     thisNote += 2;
 }
