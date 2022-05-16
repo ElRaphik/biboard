@@ -11,9 +11,9 @@ void PongGameManager::awake() {
 void PongGameManager::update() {
     musicManager.update();
     inputManager.update();
-    (doLeft ? leftBar : rightBar).update(inputManager);
+    (inputManager.shouldDoLeft() ? leftBar : rightBar).update(inputManager);
     ball.update(inputManager, leftBar);
-    doLeft = !doLeft;
+    inputManager.invertShouldDoLeft();
 }
 
 void PongGameManager::render() {

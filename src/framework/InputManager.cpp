@@ -49,3 +49,11 @@ int InputManager::getDistanceLeft() const {
 int InputManager::getDistanceRight() const {
     return distanceRight;
 }
+
+bool InputManager::shouldDoLeft() const {
+    return doLeft;
+}
+
+void InputManager::invertShouldDoLeft() {
+    doLeft = !doLeft;
+}

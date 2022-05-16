@@ -14,9 +14,14 @@ private:
 
     long durationLeft = 0, durationRight = 0;
     int distanceLeft = 0, distanceRight = 0;
+
+    bool doLeft = true;
 public:
     int getDistanceLeft() const;
     int getDistanceRight() const;
+    bool shouldDoLeft() const;
+
+    void invertShouldDoLeft();
 
 public:
     explicit InputManager(RGBmatrixPanel &panel);
