@@ -15,6 +15,11 @@ void PongGameManager::update() {
 //    leftBar.update(inputManager);
 //    rightBar.update(inputManager);
     doesOneHavePoint = ball.update(inputManager, leftBar, rightBar);
+    if(doesOneHavePoint != 0) {
+        doesOneHavePoint==1?leftScore++:rightScore++;
+        screen.writeScores(leftScore, rightScore);
+        doesOneHavePoint=0;
+    }
     inputManager.invertShouldDoLeft();
 
 }
@@ -25,4 +30,8 @@ void PongGameManager::render() {
     leftBar.render();
     rightBar.render();
     ball.render();
+}
+
+void PongGameManager::reset() {
+
 }

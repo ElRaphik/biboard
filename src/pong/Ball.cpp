@@ -81,6 +81,22 @@ void Ball::quicker() {
 
 }
 
+void Ball::reset(bool left) {
+    if(left) {
+        x = matrix.width()/4;
+        xForce=1;
+        yForce=-1;
+    } else {
+        x = 3 * matrix.width()/4;
+        xForce=-1;
+        yForce=1;
+    }
+    y = matrix.height()/2;
+    oldX=x;
+    oldY=y;
+    matrix.fillRect(x, y, width, height, matrix.Color333(7, 7, 7));
+}
+
 //void Ball::quicker() {
 //    if (ballSpeed > 20) ballSpeed--;
 //}
