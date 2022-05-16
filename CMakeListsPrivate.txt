@@ -31,6 +31,8 @@ if (CMAKE_BUILD_TYPE MATCHES "megaatmega2560")
 
     include_directories("${CMAKE_CURRENT_LIST_DIR}/include")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/src")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/megaatmega2560/Vector/src")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/megaatmega2560/Melody Player/src")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/megaatmega2560/Ultrasonic/src")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/megaatmega2560/RGB matrix Panel")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/megaatmega2560/Adafruit GFX Library")

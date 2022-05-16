@@ -22,27 +22,9 @@ void InputManager::update() {
     Serial.print(distanceRight);
     Serial.println(" cm");
 
-    distanceLeft = distanceLeft < 10 ? 10 : distanceLeft > 50 ? 50 : distanceLeft;
-    distanceRight = distanceRight < 10 ? 10 : distanceRight > 50 ? 50 : distanceRight;
-}
+    distanceLeft = distanceLeft < 10 ? 10 : distanceLeft > 37 ? 37 : distanceLeft;
+    distanceRight = distanceRight < 10 ? 10 : distanceRight > 37 ? 37 : distanceRight;
 
-void InputManager::render() {
-}
-
-unsigned int InputManager::getDistanceLeft() const {
-    return distanceLeft;
-}
-
-unsigned int InputManager::getDistanceRight() const {
-    return distanceRight;
-}
-
-bool InputManager::shouldDoLeft() const {
-    return doLeft;
-}
-
-void InputManager::invertShouldDoLeft() {
-    // FU*K YOU CLION, HOPE YOU HAPPY MF
-    if (doLeft) doLeft = false;
-    else doLeft = true;
+    posLeft = setPosition(distanceLeft);
+    posRight = setPosition(distanceRight);
 }

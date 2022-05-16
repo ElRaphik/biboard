@@ -17,43 +17,30 @@ private:
     Ultrasonic ultrasonic2;
 
     unsigned int distanceLeft = 0, distanceRight = 0;
-
-    bool doLeft = true;
-public:
-    unsigned int getDistanceLeft() const;
-    unsigned int getDistanceRight() const;
-    bool shouldDoLeft() const;
-
-    void invertShouldDoLeft();
-
+    int posLeft = 0, posRight = 0;
 public:
     explicit InputManager(RGBmatrixPanel &panel);
+
+    int getPosLeft() const {
+        return posLeft;
+    }
+
+    int getPosRight() const {
+        return posRight;
+    }
 
 public:
     void awake() override;
     void update() override;
-//    void update(PongGameManager&);
-    void render() override;
+    void render() override {}
 
-public:
-    bool isLeftC1() const {
-        return distanceLeft < 25;
-    }
-
-    bool isRightC1() const {
-        return distanceLeft > 50;
-    }
-
-    bool isLeftC2() const {
-        return distanceRight < 25;
-    }
-
-    bool isRightC2() const {
-        return distanceRight > 50;
-    }
 private:
-    void move(int, int) override {};
-//    void update() override {};
+    void move(int, int) override {}
+    static int setPosition(int dist) {
+        int res = dist - 10;
+        res = res/2;
+        return res;
+    }
 };
 
 #endif

@@ -25,5 +25,5 @@ GameObject::GameObject(RGBmatrixPanel &m) : matrix(m) {
 
 bool GameObject::isColliding(const GameObject& o) const {
     return (x >= o.getX() && x <= (o.getX() + o.getWidth())) &&
-           (y >= o.getY() && y <= (o.getX() + o.getHeight()));
+           (y >= o.getY() && y <= (o.getY() + o.getHeight()));
 }
