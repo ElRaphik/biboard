@@ -19,7 +19,7 @@ public:
 
 public:
     void awake() override;
-    void update() override;
+    void update(const InputManager& manager) override;
     void render() override;
 
 public:

@@ -14,6 +14,15 @@ GameObject::GameObject(GameObject &gameObject) : matrix(gameObject.matrix) {
     height = gameObject.height;
 }
 
+GameObject::GameObject(RGBmatrixPanel &m) : matrix(m) {
+    x = 0;
+    y = 0;
+    oldX = 0;
+    oldY = 0;
+    width = 1;
+    height = 1;
+}
+
 bool GameObject::isColliding(const GameObject& o) const {
     return (x >= o.getX() && x <= (o.getX() + o.getWidth())) &&
            (y >= o.getY() && y <= (o.getX() + o.getHeight()));

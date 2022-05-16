@@ -3,6 +3,7 @@
 
 #include "Adafruit_GFX.h"   // Core graphics library
 #include "RGBmatrixPanel.h" // Hardware-specific library
+#include "InputManager.h"
 
 class GameObject {
 
@@ -18,11 +19,12 @@ public: // members
 
 public: // constructors
     GameObject(GameObject&);
-    GameObject(int, int, int, int, int, int, RGBmatrixPanel&);
+    explicit GameObject(RGBmatrixPanel&);
+    explicit GameObject(int, int, int, int, int, int, RGBmatrixPanel&);
 
 public: // base
     virtual void awake() = 0;
-    virtual void update() = 0;
+    virtual void update(const InputManager&) = 0;
     virtual void render() = 0;
 public: // utils
     bool isColliding(const GameObject&) const;
