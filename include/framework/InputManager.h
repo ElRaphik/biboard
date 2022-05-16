@@ -30,6 +30,13 @@ public:
         return distanceLeft > 50;
     }
 
+    bool isLeftC2() const {
+        return distanceRight < 25;
+    }
+
+    bool isRightC2() const {
+        return distanceRight > 50;
+    }
 private:
     void move(int, int) override {}
 };
