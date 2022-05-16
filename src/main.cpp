@@ -44,8 +44,6 @@ int ballX, ballY, oldBallX, oldBallY;
 
 boolean inPaddle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);
 
-void clear();
-
 void moveBall();
 
 void quicker();
@@ -65,15 +63,14 @@ void setup() {
     Serial.println("Ultrasonic Sensor HC-SR04 Test");
     Serial.println("with Arduino MEGA 2560");
 
-    // matrix stuff
+    // clear
     matrix.begin();
-    clear();
+    matrix.fillScreen(black);
 
     // game
-//    paddleX = 0;
-//    paddleY = matrix.height() / 2 - paddleHeight / 2;
     leftBar.spawn();
     ball.spawn();
+    // todo: remove?
     ball.firstPush(1, 1);
 }
 
@@ -122,56 +119,4 @@ void loop() {
         ball.move(0, 0);
         ball.print();
     }
-}
-
-boolean inPaddle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight) {
-    boolean result = false;
-
-    if ((x >= rectX && x <= (rectX + rectWidth)) &&
-        (y >= rectY && y <= (rectY + rectHeight))) {
-        result = true;
-    }
-    return result;
-}
-
-void clear() {
-    matrix.fillScreen(black);
-
-}
-
-void moveBall() {
-    // if the ball goes offscreen, reverse the direction:
-    if (ballX > matrix.width() - 1 || ballX < 0) {
-        ballDirectionX = -ballDirectionX;
-        quicker();
-    }
-
-    if (ballY > matrix.height() - 1 || ballY < 0) {
-        ballDirectionY = -ballDirectionY;
-        quicker();
-    }
-
-    // check if the ball and the paddle occupy the same space on screen
-    if (inPaddle(ballX, ballY, paddleX, paddleY, paddleWidth, paddleHeight)) {
-        ballDirectionY = -ballDirectionY;
-        quicker();
-    }
-
-    // update the ball's position
-    ballX += ballDirectionX;
-    ballY += ballDirectionY;
-
-    // erase the ball's previous position
-    if (oldBallX != ballX || oldBallY != ballY) {
-        matrix.fillRect(oldBallX, oldBallY, ballDiameter, ballDiameter, black);
-    }
-//     draw the ball's current position
-    matrix.fillRect(ballX, ballY, ballDiameter, ballDiameter, white);
-
-    oldBallX = ballX;
-    oldBallY = ballY;
-}
-
-void quicker() {
-    if (ballSpeed > 20) ballSpeed--;
 }

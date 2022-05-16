@@ -8,8 +8,6 @@
 
 PongBar::PongBar(int x, int y, RGBmatrixPanel &matrix) : GameObject(x, y, x, y, 1, 3, matrix) {}
 
-PongBar::PongBar(GameObject &gameObject) : GameObject(gameObject) {}
-
 void PongBar::move(int, int yForce) {
     if (y + yForce < 0) {
         y = 0;

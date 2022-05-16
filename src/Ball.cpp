@@ -33,4 +33,41 @@ void Ball::firstPush(int xFr, int yFr) {
     yForce = yFr;
 }
 
+/*
+ void moveBall() {
+    // if the ball goes offscreen, reverse the direction:
+    if (ballX > matrix.width() - 1 || ballX < 0) {
+        ballDirectionX = -ballDirectionX;
+        quicker();
+    }
 
+    if (ballY > matrix.height() - 1 || ballY < 0) {
+        ballDirectionY = -ballDirectionY;
+        quicker();
+    }
+
+    // check if the ball and the paddle occupy the same space on screen
+    if (inPaddle(ballX, ballY, paddleX, paddleY, paddleWidth, paddleHeight)) {
+        ballDirectionY = -ballDirectionY;
+        quicker();
+    }
+
+    // update the ball's position
+    ballX += ballDirectionX;
+    ballY += ballDirectionY;
+
+    // erase the ball's previous position
+    if (oldBallX != ballX || oldBallY != ballY) {
+        matrix.fillRect(oldBallX, oldBallY, ballDiameter, ballDiameter, black);
+    }
+//     draw the ball's current position
+    matrix.fillRect(ballX, ballY, ballDiameter, ballDiameter, white);
+
+    oldBallX = ballX;
+    oldBallY = ballY;
+}
+
+void quicker() {
+    if (ballSpeed > 20) ballSpeed--;
+}
+ */

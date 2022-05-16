@@ -24,7 +24,7 @@ public: // constructors
     GameObject(int, int, int, int, int, int, RGBmatrixPanel&);
 
 public: // methods
-    bool isColliding(GameObject&);
+    bool isColliding(const GameObject&) const;
     virtual void move(int, int) = 0;
     virtual void print() = 0;
 };

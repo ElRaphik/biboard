@@ -14,7 +14,7 @@ GameObject::GameObject(GameObject &gameObject) : matrix(gameObject.matrix) {
     height = gameObject.height;
 }
 
-bool GameObject::isColliding(GameObject &gameObject) {
-    // TODO implement collisions
-    return false;
+bool GameObject::isColliding(const GameObject& o) const {
+    return (x >= o.getX() && x <= (o.getX() + o.getWidth())) &&
+           (y >= o.getY() && y <= (o.getX() + o.getHeight()));
 }
