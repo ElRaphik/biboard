@@ -1,8 +1,8 @@
 #ifndef PING_GAMEOBJECT_H
 #define PING_GAMEOBJECT_H
+
 #include "Adafruit_GFX.h"   // Core graphics library
 #include "RGBmatrixPanel.h" // Hardware-specific library
-
 
 class GameObject {
 
@@ -25,6 +25,7 @@ public: // constructors
 
 public: // methods
     bool isColliding(const GameObject&) const;
+    virtual void awake() = 0;
     virtual void move(int, int) = 0;
     virtual void print() = 0;
 };
