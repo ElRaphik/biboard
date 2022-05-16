@@ -1,5 +1,5 @@
-#include "GameObject.h"
-#include <RGBmatrixPanel.h> // Hardware-specific library
+#include "framework/GameObject.h"
+#include "RGBmatrixPanel.h" // Hardware-specific library
 
 GameObject::GameObject(
         int x, int y, int oldX, int oldY, int width, int height, RGBmatrixPanel &matrix

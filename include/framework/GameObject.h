@@ -13,21 +13,20 @@ protected:
 public: // members
     int getX() const { return x; }
     int getY() const { return y; }
-    int getOldX() const { return oldX; }
-    int getOldY() const { return oldY; }
     int getWidth() const { return width; }
     int getHeight() const { return height; }
-    const RGBmatrixPanel &getMatrix() const { return matrix; }
 
 public: // constructors
     GameObject(GameObject&);
     GameObject(int, int, int, int, int, int, RGBmatrixPanel&);
 
-public: // methods
-    bool isColliding(const GameObject&) const;
+public: // base
     virtual void awake() = 0;
-    virtual void move(int, int) = 0;
-    virtual void print() = 0;
+    virtual void update() = 0;
+    virtual void render() = 0;
+public: // utils
+    bool isColliding(const GameObject&) const;
+    virtual void move(int x, int y) = 0;
 };
 
 
