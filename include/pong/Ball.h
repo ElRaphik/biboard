@@ -26,6 +26,7 @@ public:
 public:
     void move(int x, int y) override;
     void firstPush(int, int);
+    void reset(bool);
 private:
     void update(const InputManager& manager) override;
     void quicker();

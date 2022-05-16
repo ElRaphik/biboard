@@ -41,3 +41,10 @@ void PongBar::move(int, int yForce) {
     } // set y to 16-height
     y += yForce;
 }
+
+void PongBar::reset(bool left) {
+    x=left ? 0 : 31;
+    y=matrix.height()/2;
+    oldX=x;
+    oldY=y;
+}
