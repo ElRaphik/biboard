@@ -17,10 +17,11 @@ public: // attributes
     InputManager inputManager;
     MusicManager musicManager;
     Screen screen;
+    bool doLeft;
 
 public: // constructor
     explicit PongGameManager(RGBmatrixPanel& matrix) : GameManager(matrix), leftBar(0, 0, matrix), rightBar(31, 0, matrix), ball(matrix.width() / 2, matrix.height() / 2, matrix),
-                                                       inputManager(matrix), musicManager(matrix), screen(matrix) {
+                                                       inputManager(matrix), musicManager(matrix), screen(matrix), doLeft(true) {
     }
 public:
     void awake() override;

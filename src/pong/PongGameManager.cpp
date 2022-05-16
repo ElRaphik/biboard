@@ -10,10 +10,9 @@ void PongGameManager::awake() {
 
 void PongGameManager::update() {
     musicManager.update();
-    inputManager.update();
-    (inputManager.shouldDoLeft() ? leftBar : rightBar).update(inputManager);
-//    leftBar.update(inputManager);
-//    rightBar.update(inputManager);
+    inputManager.update(inputManager.shouldDoLeft());
+    leftBar.update(inputManager, true);
+    rightBar.update(inputManager, false);
     doesOneHavePoint = ball.update(inputManager, leftBar, rightBar);
     if(doesOneHavePoint != 0) {
         doesOneHavePoint==1?leftScore++:rightScore++;

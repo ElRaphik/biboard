@@ -12,13 +12,11 @@ void PongBar::awake() {
 }
 
 void PongBar::update(const InputManager& manager) {
-    if (manager.isLeftC1()) {
-        move(0, -1);
-        Serial.println("PongBar go up");
-    } else if (manager.isRightC1()) {
-        move(0, 1);
-        Serial.println("PongBar go down");
-    }
+
+}
+
+void PongBar::update(const InputManager &manager, bool left) {
+     y = left ? manager.getPosLeft() : manager.getPosRight();
 }
 
 void PongBar::render() {
