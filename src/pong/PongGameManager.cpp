@@ -9,7 +9,7 @@ void PongGameManager::awake() {
 void PongGameManager::update() {
     manager.update();
     leftBar.update(manager);
-    ball.update(manager);
+    ball.update(manager, leftBar);
 }
 
 void PongGameManager::render() {

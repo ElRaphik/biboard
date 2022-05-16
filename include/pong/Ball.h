@@ -20,10 +20,13 @@ public:
     Ball(int, int, RGBmatrixPanel&);
 public:
     void awake() override;
-    void update(const InputManager& manager) override;
+    void update(const InputManager& manager, const PongBar& bar);
     void render() override;
 public:
     void move(int x, int y) override;
+private:
+    void update(const InputManager& manager) override {}
+    void quicker();
 };
 
 
