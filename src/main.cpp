@@ -1,6 +1,7 @@
 #include <Adafruit_GFX.h>   // Core graphics library
 #include <RGBmatrixPanel.h> // Hardware-specific library
 #include "PongBar.h"
+#include "Ball.h"
 
 #define CLK 11 // USE THIS ON ARDUINO MEGA
 #define OE   9
@@ -48,6 +49,7 @@ void quicker();
 
 
 PongBar leftBar(0, 0, matrix);
+Ball ball(matrix.width()/2, matrix.height()/2, matrix);
 
 
 void setup() {
@@ -68,6 +70,8 @@ void setup() {
 //    paddleX = 0;
 //    paddleY = matrix.height() / 2 - paddleHeight / 2;
     leftBar.spawn();
+    ball.spawn();
+    ball.firstPush(1, 1);
 }
 
 void loop() {
@@ -111,7 +115,9 @@ void loop() {
     leftBar.print();
 
     if (millis() % (ballSpeed/2) < 2) {
-        moveBall();
+//        moveBall();
+        ball.move(0, 0);
+        ball.print();
     }
 }
 
